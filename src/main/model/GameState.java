@@ -1,6 +1,6 @@
 package model;
 
-public class gamestate {
+public class GameState {
 
     private boolean running;
     private boolean paused;
@@ -9,7 +9,7 @@ public class gamestate {
     private int score;
     private int level;
 
-    public gamestate() {
+    public GameState() {
         this.running = false;
         this.paused = false;
         this.gameOver = false;
