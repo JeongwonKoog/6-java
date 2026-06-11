@@ -1,74 +1,21 @@
-package model;
+package main.model;
 
 public class GameState {
-
-    private boolean running;
-    private boolean paused;
-    private boolean gameOver;
-
-    private int score;
-    private int level;
-
-    public GameState() {
-        this.running = false;
-        this.paused = false;
-        this.gameOver = false;
-        this.score = 0;
-        this.level = 1;
+    public enum TeacherState {
+        TEACHING, // 칠판 보는 중 (안전)
+        WARNING,  // 돌아보기 직전 (경고)
+        LOOKING   // 뒤돌아봄 (위험)
     }
 
-    public void startGame() {
-        running = true;
-        paused = false;
-        gameOver = false;
-    }
+    private TeacherState currentTeacherState = TeacherState.TEACHING;
+    private int currentScore = 0;
+    private boolean isGameOver = false;
 
-    public void pauseGame() {
-        paused = true;
-    }
-
-    public void resumeGame() {
-        paused = false;
-    }
-
-    public void endGame() {
-        running = false;
-        gameOver = true;
-    }
-
-    public void increaseScore() {
-        score++;
-    }
-
-    public void increaseLevel() {
-        level++;
-    }
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public boolean isPaused() {
-        return paused;
-    }
-
-    public boolean isGameOver() {
-        return gameOver;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void reset() {
-        running = false;
-        paused = false;
-        gameOver = false;
-        score = 0;
-        level = 1;
-    }
+    // Getters and Setters
+    public TeacherState getCurrentTeacherState() { return currentTeacherState; }
+    public void setCurrentTeacherState(TeacherState state) { this.currentTeacherState = state; }
+    public int getCurrentScore() { return currentScore; }
+    public void setCurrentScore(int score) { this.currentScore = score; }
+    public boolean isGameOver() { return isGameOver; }
+    public void setGameOver(boolean gameOver) { isGameOver = gameOver; }
 }
