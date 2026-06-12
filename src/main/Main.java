@@ -17,6 +17,10 @@ public class Main {
     private static RankingService rankingService;
     private static String playerName;
 
+    public static void setPlayerName(String name) {
+        playerName = name;
+    }
+
     public static void main(String[] args) {
         // 스윙 UI 스레드 안전하게 실행
         SwingUtilities.invokeLater(() -> {
@@ -24,21 +28,9 @@ public class Main {
             csvStorage = new CsvStorage("data/rankings.csv");
             rankingService = new RankingService();
 
-            // 플레이어 이름 입력 받기
-            playerName = JOptionPane.showInputDialog(
-                    null,
-                    "교실에서 몰래 춤출 학생의 이름을 입력하세요:",
-                    "게임 입학 신청서",
-                    JOptionPane.QUESTION_MESSAGE
-            );
-
-            if (playerName == null || playerName.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "이름이 입력되지 않아 게임을 종료합니다.", "안내", JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
-            }
-
-            // 게임 세션 시작
-            startNewGameSession();
+            // 타이틀 화면을 먼저 보여주고, 타이틀에서 이름을 입력받으면 게임을 시작합니다.
+            main.ui.TitleFrame titleFrame = new main.ui.TitleFrame();
+            titleFrame.setVisible(true);
         });
     }
 

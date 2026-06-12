@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80c79859-aebd-4911-88b3-755874e78253" name="변경" comment="2026 06 11" />
+    <list default="true" id="80c79859-aebd-4911-88b3-755874e78253" name="변경" comment="2026 06 11">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/rankings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/rankings.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/6-java/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/6-java/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/6-java/main/ui/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/6-java/main/ui/MainFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/6-java/main/ui/MainFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/6-java/main/ui/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/6-java/main/ui/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ui/MainFrame.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="24" />
+    <option name="cachedIndexableFilesCount" value="39" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -32,12 +41,71 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/JeongwonKoog/6-java.git&quot;,
-    &quot;accountId&quot;: &quot;f7916b4d-432c-45e2-ba20-7dee9148954b&quot;
+    &quot;accountId&quot;: &quot;1a836e72-413f-413d-99ec-bafc1fd95373&quot;
   }
 }</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0" />
+      <entry key="M5" value="1.0" />
+      <entry key="M10" value="1.0" />
+      <entry key="M15" value="1.0" />
+      <entry key="M30" value="1.0" />
+      <entry key="H1" value="1.0" />
+      <entry key="H2" value="1.0" />
+      <entry key="H4" value="1.0" />
+      <entry key="D1" value="1.0" />
+      <entry key="W1" value="1.0" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.06792092890787861" />
+      <entry key="MS500" value="0.5839836973065589" />
+      <entry key="S2" value="0.8741786204103732" />
+      <entry key="S5" value="0.9476327737733308" />
+      <entry key="S10" value="0.9734643156137418" />
+      <entry key="S30" value="0.9910753596120332" />
+      <entry key="S60" value="0.9955276789783563" />
+      <entry key="M2" value="0.9977613336757224" />
+      <entry key="M5" value="0.999103931355974" />
+      <entry key="M10" value="0.9995518652656169" />
+      <entry key="M15" value="0.9997012211921058" />
+      <entry key="M30" value="0.9998505994357886" />
+      <entry key="H1" value="0.9999252969276198" />
+      <entry key="H2" value="0.9999626477662152" />
+      <entry key="H4" value="0.9999813237087056" />
+      <entry key="D1" value="0.9999968872605615" />
+      <entry key="W1" value="0.9999995553223442" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0,
@@ -58,10 +126,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/eomty/IdeaProjects/6-java/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,7 +141,7 @@
     "project.structure.last.edited": "모듈",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "settings.editor.selected.configurable": "ml.llm.AcpAgentsConfigurable",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true",
     "애플리케이션.LogicTest.executor": "Run",
@@ -79,6 +149,11 @@
     "애플리케이션.main.Main.executor": "Run"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\eomty\IdeaProjects\6-java\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager" selected="애플리케이션.main.Main">
     <configuration name="LogicTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="LogicTest" />
@@ -118,8 +193,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.32098.37" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
       </set>
     </attachedChunks>
   </component>
@@ -141,6 +216,10 @@
       <workItem from="1780994547561" duration="207000" />
       <workItem from="1780994854136" duration="2615000" />
       <workItem from="1781170149796" duration="4020000" />
+      <workItem from="1781178836285" duration="49000" />
+      <workItem from="1781178896477" duration="557000" />
+      <workItem from="1781179469469" duration="306000" />
+      <workItem from="1781268890105" duration="14493000" />
     </task>
     <task id="LOCAL-00001" summary="첫 ai 사용후 기초">
       <option name="closed" value="true" />
@@ -187,5 +266,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
