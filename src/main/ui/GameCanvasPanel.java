@@ -23,15 +23,15 @@ public class GameCanvasPanel extends JPanel {
     private int currentFrame = 0;  // 춤 애니메이션 현재 프레임 (0~3)
 
     // 캐릭터 위치 및 크기 (픽셀)
-    private static final int STUDENT_X = 250;      // 학생 X 좌표
+    private static final int STUDENT_X = 180;      // 학생 X 좌표
     private static final int STUDENT_Y = 300;      // 학생 Y 좌표
     private static final int STUDENT_WIDTH = 200;  // 학생 너비
     private static final int STUDENT_HEIGHT = 250; // 학생 높이
 
     private static final int TEACHER_X = 120;       // 교수님 X 좌표
-    private static final int TEACHER_Y = 100;       // 교수님 Y 좌표
-    private static final int TEACHER_WIDTH = 160;  // 교수님 너비
-    private static final int TEACHER_HEIGHT = 220; // 교수님 높이
+    private static final int TEACHER_Y = 160;       // 교수님 Y 좌표
+    private static final int TEACHER_WIDTH = 200;  // 교수님 너비
+    private static final int TEACHER_HEIGHT = 260; // 교수님 높이
 
     public GameCanvasPanel(GameState gameState, EngineService engineService, int highScore) {
         this.gameState = gameState;
@@ -78,20 +78,7 @@ public class GameCanvasPanel extends JPanel {
             g.fillRect(0, 0, getWidth(), getHeight());
         }
 
-        // 1) 학생 그리기 (레이어 1)
-        BufferedImage studentImage = null;
-        if (engineService != null && engineService.isDancing()) {
-            if (ImageLoader.학생_춤 != null && ImageLoader.학생_춤.length > currentFrame) {
-                studentImage = ImageLoader.학생_춤[currentFrame];
-            }
-        } else {
-            studentImage = ImageLoader.학생_공부;
-        }
-        if (studentImage != null) {
-            g.drawImage(studentImage, STUDENT_X, STUDENT_Y, STUDENT_WIDTH, STUDENT_HEIGHT, null);
-        }
-
-        // 2) 교수님 그리기 (레이어 2)
+        // 1) 교수님 그리기 (레이어 1 - 뒤쪽)
         BufferedImage teacherImage = null;
         if (gameState.getCurrentTeacherState() == TeacherState.TEACHING) {
             teacherImage = ImageLoader.상태1;
@@ -102,6 +89,19 @@ public class GameCanvasPanel extends JPanel {
         }
         if (teacherImage != null) {
             g.drawImage(teacherImage, TEACHER_X, TEACHER_Y, TEACHER_WIDTH, TEACHER_HEIGHT, null);
+        }
+
+        // 2) 학생 그리기 (레이어 2 - 앞쪽)
+        BufferedImage studentImage = null;
+        if (engineService != null && engineService.isDancing()) {
+            if (ImageLoader.학생_춤 != null && ImageLoader.학생_춤.length > currentFrame) {
+                studentImage = ImageLoader.학생_춤[currentFrame];
+            }
+        } else {
+            studentImage = ImageLoader.학생_공부;
+        }
+        if (studentImage != null) {
+            g.drawImage(studentImage, STUDENT_X, STUDENT_Y, STUDENT_WIDTH, STUDENT_HEIGHT, null);
         }
 
         // UI 및 오버레이
