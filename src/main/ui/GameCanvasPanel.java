@@ -23,15 +23,15 @@ public class GameCanvasPanel extends JPanel {
     private int currentFrame = 0;  // 춤 애니메이션 현재 프레임 (0~3)
 
     // 캐릭터 위치 및 크기 (픽셀)
-    private static final int STUDENT_X = 280;      // 학생 X 좌표
-    private static final int STUDENT_Y = 380;      // 학생 Y 좌표
-    private static final int STUDENT_WIDTH = 250;  // 학생 너비
-    private static final int STUDENT_HEIGHT = 320; // 학생 높이
+    private static final int STUDENT_X = 250;      // 학생 X 좌표
+    private static final int STUDENT_Y = 300;      // 학생 Y 좌표
+    private static final int STUDENT_WIDTH = 200;  // 학생 너비
+    private static final int STUDENT_HEIGHT = 250; // 학생 높이
 
-    private static final int TEACHER_X = 50;       // 교수님 X 좌표
-    private static final int TEACHER_Y = 120;       // 교수님 Y 좌표
-    private static final int TEACHER_WIDTH = 250;  // 교수님 너비
-    private static final int TEACHER_HEIGHT = 350; // 교수님 높이
+    private static final int TEACHER_X = 120;       // 교수님 X 좌표
+    private static final int TEACHER_Y = 100;       // 교수님 Y 좌표
+    private static final int TEACHER_WIDTH = 160;  // 교수님 너비
+    private static final int TEACHER_HEIGHT = 220; // 교수님 높이
 
     public GameCanvasPanel(GameState gameState, EngineService engineService, int highScore) {
         this.gameState = gameState;
@@ -70,7 +70,7 @@ public class GameCanvasPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // 0) 배경 (가장 뒤)
+        // 0) 배경 (레이어 0)
         if (ImageLoader.배경 != null) {
             g.drawImage(ImageLoader.배경, 0, 0, getWidth(), getHeight(), null);
         } else {
@@ -78,7 +78,7 @@ public class GameCanvasPanel extends JPanel {
             g.fillRect(0, 0, getWidth(), getHeight());
         }
 
-        // 1) 학생 그리기 (학생이 교수님보다 '앞'에 보이도록 중간 레이어)
+        // 1) 학생 그리기 (레이어 1)
         BufferedImage studentImage = null;
         if (engineService != null && engineService.isDancing()) {
             if (ImageLoader.학생_춤 != null && ImageLoader.학생_춤.length > currentFrame) {
@@ -91,7 +91,7 @@ public class GameCanvasPanel extends JPanel {
             g.drawImage(studentImage, STUDENT_X, STUDENT_Y, STUDENT_WIDTH, STUDENT_HEIGHT, null);
         }
 
-        // 2) 교수님 그리기 (마지막으로 그려서 '앞'에 보이게 할 수도 있음)
+        // 2) 교수님 그리기 (레이어 2)
         BufferedImage teacherImage = null;
         if (gameState.getCurrentTeacherState() == TeacherState.TEACHING) {
             teacherImage = ImageLoader.상태1;
