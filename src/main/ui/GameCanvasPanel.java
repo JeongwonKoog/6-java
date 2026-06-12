@@ -23,15 +23,15 @@ public class GameCanvasPanel extends JPanel {
     private int currentFrame = 0;  // 춤 애니메이션 현재 프레임 (0~3)
 
     // 캐릭터 위치 및 크기 (픽셀)
-    private static final int STUDENT_X = 400;      // 학생 X 좌표
-    private static final int STUDENT_Y = 550;      // 학생 Y 좌표
-    private static final int STUDENT_WIDTH = 150;  // 학생 너비
-    private static final int STUDENT_HEIGHT = 200; // 학생 높이
+    private static final int STUDENT_X = 350;      // 학생 X 좌표
+    private static final int STUDENT_Y = 500;      // 학생 Y 좌표
+    private static final int STUDENT_WIDTH = 220;  // 학생 너비
+    private static final int STUDENT_HEIGHT = 280; // 학생 높이
 
-    private static final int TEACHER_X = 250;       // 교수님 X 좌표
-    private static final int TEACHER_Y = 100;       // 교수님 Y 좌표
-    private static final int TEACHER_WIDTH = 300;  // 교수님 너비
-    private static final int TEACHER_HEIGHT = 400; // 교수님 높이
+    private static final int TEACHER_X = 300;       // 교수님 X 좌표
+    private static final int TEACHER_Y = 150;       // 교수님 Y 좌표
+    private static final int TEACHER_WIDTH = 180;  // 교수님 너비
+    private static final int TEACHER_HEIGHT = 250; // 교수님 높이
 
     public GameCanvasPanel(GameState gameState, EngineService engineService, int highScore) {
         this.gameState = gameState;
@@ -70,19 +70,44 @@ public class GameCanvasPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // 🎨 [레이어 1] 배경 이미지 그리기
-        drawBackground(g);
+        // 1) 배경 (가장 뒤)
+        if (ImageLoader.배경 != null) {
+            g.drawImage(ImageLoader.배경, 0, 0, getWidth(), getHeight(), null);
+        } else {
+            g.setColor(new Color(222, 184, 135));
+            g.fillRect(0, 0, getWidth(), getHeight());
+        }
 
-        // 🎨 [레이어 2] 학생 캐릭터 그리기 (공부 또는 춤)
-        drawStudent(g);
+        // 2) 학생 그리기 (중간)
+        BufferedImage studentImage = null;
+        if (engineService != null && engineService.isDancing()) {
+            if (ImageLoader.학생_춤 != null && ImageLoader.학생_춤.length > currentFrame) {
+                studentImage = ImageLoader.학생_춤[currentFrame];
+            }
+        } else {
+            studentImage = ImageLoader.학생_공부;
+        }
+        if (studentImage != null) {
+            g.drawImage(studentImage, STUDENT_X, STUDENT_Y, STUDENT_WIDTH, STUDENT_HEIGHT, null);
+        }
 
-        // 🎨 [레이어 3] 교수님 캐릭터 그리기 (상태별)
-        drawTeacher(g);
+        // 3) 교수님 그리기 (가장 위)
+        BufferedImage teacherImage = null;
+        if (gameState.getCurrentTeacherState() == TeacherState.TEACHING) {
+            teacherImage = ImageLoader.상태1;
+        } else if (gameState.getCurrentTeacherState() == TeacherState.WARNING) {
+            teacherImage = ImageLoader.상태2;
+        } else if (gameState.getCurrentTeacherState() == TeacherState.LOOKING) {
+            teacherImage = ImageLoader.상태3;
+        }
+        if (teacherImage != null) {
+            g.drawImage(teacherImage, TEACHER_X, TEACHER_Y, TEACHER_WIDTH, TEACHER_HEIGHT, null);
+        }
 
-        // 🎨 [레이어 4] UI 그리기 (점수, 버튼 영역 안내 등)
+        // UI
         drawUI(g2d);
 
-        // 🎨 [레이어 5] 게임 오버 오버레이
+        // 게임 오버
         if (gameState.isGameOver()) {
             drawGameOverOverlay(g2d);
         }
