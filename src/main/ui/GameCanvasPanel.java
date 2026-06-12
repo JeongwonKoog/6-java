@@ -23,15 +23,15 @@ public class GameCanvasPanel extends JPanel {
     private int currentFrame = 0;  // 춤 애니메이션 현재 프레임 (0~3)
 
     // 캐릭터 위치 및 크기 (픽셀)
-    private static final int STUDENT_X = 180;      // 학생 X 좌표
+    private static final int STUDENT_X = 150;      // 학생 X 좌표
     private static final int STUDENT_Y = 300;      // 학생 Y 좌표
     private static final int STUDENT_WIDTH = 200;  // 학생 너비
     private static final int STUDENT_HEIGHT = 250; // 학생 높이
 
-    private static final int TEACHER_X = 120;       // 교수님 X 좌표
+    private static final int TEACHER_X = 90;       // 교수님 X 좌표
     private static final int TEACHER_Y = 160;       // 교수님 Y 좌표
-    private static final int TEACHER_WIDTH = 200;  // 교수님 너비
-    private static final int TEACHER_HEIGHT = 260; // 교수님 높이
+    private static final int TEACHER_WIDTH = 210;  // 교수님 너비
+    private static final int TEACHER_HEIGHT = 280; // 교수님 높이
 
     public GameCanvasPanel(GameState gameState, EngineService engineService, int highScore) {
         this.gameState = gameState;
