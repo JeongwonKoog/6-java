@@ -20,7 +20,8 @@ public class GameCanvasPanel extends JPanel {
 
     // 애니메이션 타이머
     private Timer animationTimer;
-    private int currentFrame = 0;  // 춤 애니메이션 현재 프레임 (0~3)
+    private int currentFrame = 0;       // 춤 애니메이션 현재 프레임 (0~3)
+    private boolean wasDancing = false;  // 직전 상태가 춤추는 중이었는지 기억하는 변수
 
     // 캐릭터 위치 및 크기 (픽셀)
     private static final int STUDENT_X = 150;      // 학생 X 좌표
@@ -29,7 +30,7 @@ public class GameCanvasPanel extends JPanel {
     private static final int STUDENT_HEIGHT = 250; // 학생 높이
 
     private static final int TEACHER_X = 90;       // 교수님 X 좌표
-    private static final int TEACHER_Y = 160;       // 교수님 Y 좌표
+    private static final int TEACHER_Y = 160;      // 교수님 Y 좌표
     private static final int TEACHER_WIDTH = 210;  // 교수님 너비
     private static final int TEACHER_HEIGHT = 280; // 교수님 높이
 
@@ -48,18 +49,41 @@ public class GameCanvasPanel extends JPanel {
     /**
      * 애니메이션 타이머 초기화: 150ms마다 춤 프레임 업데이트
      */
+    /**
+     * 애니메이션 타이머 초기화: 150ms마다 춤 프레임 및 사운드 업데이트
+     */
     private void initAnimationTimer() {
         animationTimer = new Timer(150, e -> {
-            // 춤을 추고 있을 때만 프레임 증가
-            if (engineService != null && engineService.isDancing()) {
+            // 현재 실제로 춤을 추고 있는지 확인
+            boolean isCurrentlyDancing = (engineService != null && engineService.isDancing());
+
+            if (isCurrentlyDancing) {
                 currentFrame = (currentFrame + 1) % 4;  // 0~3 순환
+
+                // ★ [조건 1] 방금 막 춤을 추기 시작했고, 게임 오버 상태가 아닐 때만 음악 재생!
+                if (!wasDancing && !gameState.isGameOver()) {
+                    SoundManager.playBGM("bgm.wav"); // 본인의 음악 파일명으로 변경하세요
+                }
+            } else {
+                // ★ [조건 2] 춤을 추다가 방금 막 멈췄다면 음악 정지!
+                if (wasDancing) {
+                    SoundManager.stopBGM();
+                }
             }
+
+            // 게임 오버가 되는 순간에도 혹시 음악이 켜져 있다면 확실히 꺼주는 안전장치
+            if (gameState.isGameOver() && wasDancing) {
+                SoundManager.stopBGM();
+            }
+
+            // 현재 상태를 다음 프레임에서 쓸 수 있도록 저장
+            wasDancing = isCurrentlyDancing;
+
             // 항상 화면 갱신
             repaint();
         });
         animationTimer.start();
     }
-
     /**
      * 모든 게임 요소를 레이어링하여 렌더링
      * 순서: 배경 → 학생 → 교수님 → UI
