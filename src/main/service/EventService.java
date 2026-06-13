@@ -1,5 +1,6 @@
 package main.service;
 
+import main.Main; // 👈 [추가] 설정창의 난이도를 가져오기 위해 임포트합니다.
 import main.model.GameState;
 import main.model.GameState.TeacherState;
 import javax.swing.Timer;
@@ -30,7 +31,18 @@ public class EventService {
             TeacherState current = gameState.getCurrentTeacherState();
             if (current == TeacherState.TEACHING) {
                 gameState.setCurrentTeacherState(TeacherState.WARNING);
-                teacherTimer.setInitialDelay(800); // 경고 시간은 0.8초로 고정 (난이도 조절 가능)
+
+                // 🟢 [난이도 조절] 느낌표가 뜨고 난 뒤, 진짜로 뒤돌아볼 때까지의 대기 시간(ms) 설정
+                int warningDelay = 800; // 기본 Normal 모드: 0.8초의 유예 시간
+                String difficulty = Main.getDifficulty();
+
+                if ("Easy".equals(difficulty)) {
+                    warningDelay = 1400; // 순한맛(쉬움): 1.4초 동안 깜빡여서 초보자도 안전하게 대피 가능
+                } else if ("Hard".equals(difficulty)) {
+                    warningDelay = 350;  // 매운맛(어려움): 0.35초 만에 빛의 속도로 돌아봄 (초인적인 반응속도 필요)
+                }
+
+                teacherTimer.setInitialDelay(warningDelay);
                 teacherTimer.restart();
             } else if (current == TeacherState.WARNING) {
                 gameState.setCurrentTeacherState(TeacherState.LOOKING);

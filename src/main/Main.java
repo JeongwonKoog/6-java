@@ -9,16 +9,26 @@ import main.ui.MainFrame;
 import javax.swing.*;
 
 /**
- * 프로그램의 진입점 (Main 클래스에는 MainFrame 코드가 섞여 있으면 안 됩니다!)
+ * 프로그램의 진입점
  */
 public class Main {
-    // 🟢 [해결 포인트 1] static 메소드에서 쓰려면 변수들도 반드시 static이어야 합니다.
     private static CsvStorage csvStorage;
     private static RankingService rankingService;
     private static String playerName;
+    private static String difficulty = "Normal"; // 👈 난이도 변수 합체 완료!
 
     public static void setPlayerName(String name) {
         playerName = name;
+    }
+
+    // 👈 난이도를 저장하고 불러오는 메서드 합체 완료!
+    public static void setDifficulty(String diff) {
+        difficulty = diff;
+        System.out.println("★ 난이도가 변경되었습니다: " + diff);
+    }
+
+    public static String getDifficulty() {
+        return difficulty;
     }
 
     public static void main(String[] args) {
