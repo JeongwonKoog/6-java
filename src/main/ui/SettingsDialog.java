@@ -38,10 +38,19 @@ public class SettingsDialog extends JDialog {
         volumeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         contentPanel.add(volumeLabel);
 
-        JSlider volumeSlider = new JSlider(0, 100, 70);
+        // 🟢 현재 SoundManager에 설정된 실제 볼륨(0.0~1.0)을 가져와 슬라이더의 초기 위치(0~100)로 세팅합니다.
+        int currentVolPct = (int) (SoundManager.getVolume() * 100);
+        JSlider volumeSlider = new JSlider(0, 100, currentVolPct);
         volumeSlider.setBackground(new Color(245, 245, 245));
         volumeSlider.setMaximumSize(new Dimension(250, 40));
         volumeSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // 🟢 [실시간 볼륨 조절 연동 추가] 슬라이더 바를 움직이면 SoundManager에 실시간 주입
+        volumeSlider.addChangeListener(e -> {
+            float volume = volumeSlider.getValue() / 100.0f; // 0~100 수치를 0.0~1.0 소수점으로 변환
+            SoundManager.setVolume(volume);
+        });
+
         contentPanel.add(volumeSlider);
         contentPanel.add(Box.createVerticalStrut(15));
 

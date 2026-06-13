@@ -9,7 +9,7 @@ import javax.swing.Timer;
 /**
  * 게임의 핵심 루프 및 판정을 담당하는 서비스
  * [F-03] 사망 판정 (선생님이 볼 때 춤추면 게임 오버)
- * [F-05] 난이도 가속 (점수가 높아질수록 가중치 및 속도 변화 가능)
+ * [F-05] 난이도 가속 (점수대별 기본 가중치 상승)
  */
 public class EngineService {
     private final GameState gameState;
@@ -19,6 +19,9 @@ public class EngineService {
 
     private Timer gameLoopTimer;
     private boolean isDancing = false;         // 현재 플레이어가 버튼을 누르고 있는지 여부
+
+    // 🟢 [추가] 콤보 시스템 변수
+    private int combo = 0;
 
     /**
      * @param gameState         게임 전체 상태 모델
@@ -53,11 +56,26 @@ public class EngineService {
             }
 
             // 플레이어가 안전하게 춤추고 있다면 점수 가산
-            if (isDancing && gameState.getCurrentTeacherState() == TeacherState.TEACHING) {
-                // [F-05] 난이도 가속/보상 설계: 점수가 높아질수록 기본 틱당 획득 점수 상승
+            if (isDancing) {
+                TeacherState teacherState = gameState.getCurrentTeacherState();
                 int scoreBonus = calculateScoreBonus();
-                player.addScore(scoreBonus);
+
+                if (teacherState == TeacherState.TEACHING) {
+                    // 일반 상태: 콤보가 차곡차곡 1씩 상승
+                    combo++;
+                    // 10콤보당 기본 점수에 +1점씩 추가 보너스
+                    player.addScore(scoreBonus + (combo / 10));
+
+                } else if (teacherState == TeacherState.WARNING) {
+                    // 🔥 위험 상태 (피버): 콤보도 2배, 점수도 2배 폭등!
+                    combo += 2;
+                    player.addScore(scoreBonus * 2);
+                }
+
                 gameState.setCurrentScore(player.getScore());
+            } else {
+                // 🛑 춤을 멈추면 안전해지지만 콤보는 초기화됩니다.
+                combo = 0;
             }
 
             // UI 스레드에 화면 갱신 요청
@@ -120,5 +138,10 @@ public class EngineService {
 
     public boolean isDancing() {
         return isDancing;
+    }
+
+    // 🟢 [추가] UI에서 현재 콤보수를 가져가서 그릴 수 있도록 Getter 제공
+    public int getCombo() {
+        return combo;
     }
 }
